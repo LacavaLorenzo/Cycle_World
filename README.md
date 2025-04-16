@@ -1,5 +1,5 @@
 # 🚲 Cycle World - Análisis de Datos y Dashboard Interactivo con Snowflake & Streamlit 🚀
-
+![BicisLondres](images/01_Bicis_Londres.jpg)
 ## 📝 Resumen del Proyecto
 
 Este proyecto representa el ejercicio final de un proceso de selección y formación enfocado en **Snowflake**, la plataforma de datos en la nube. El objetivo principal fue simular un escenario real para la empresa ficticia "Cycle World" en Londres, que inicia su transformación digital y necesita analizar datos de uso de bicicletas que originalmente residían en archivos dispersos (.csv, .xlsx).
