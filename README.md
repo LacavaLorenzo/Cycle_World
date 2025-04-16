@@ -149,7 +149,11 @@ Se desarrolló una aplicación web interactiva utilizando Streamlit para visuali
 
 ## 🚀 Ejecución / Visualización
 
-`Puedes ver la aplicación desplegada aquí: [cycle-world](https://cycle-world.streamlit.app/)`
+Puedes ver la aplicación desplegada aquí:
+
+[cycle-world](https://cycle-world.streamlit.app/)
+
+Espero que te guste...
 
 ---
 
