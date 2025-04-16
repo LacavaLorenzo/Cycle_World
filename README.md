@@ -50,7 +50,7 @@ Cycle World necesitaba comenzar a explotar la información de sus operaciones de
 
 ## 🛠️ Proceso de Desarrollo Detallado
 
-Se siguió un enfoque estructurado en fases, utilizando Snowflake como motor principal:
+Se siguió un enfoque estructurado en fases, utilizando Snowflake como motor principal, todos los archivos SQL se pueden ver en este mismo repositorio (aunque funcionen internamente en Snowflake):
 
 ### Fase 1: Configuración y Carga de Datos RAW 📥
 
@@ -149,12 +149,7 @@ Se desarrolló una aplicación web interactiva utilizando Streamlit para visuali
 
 ## 🚀 Ejecución / Visualización
 
-*(Aquí podrías poner el enlace a tu aplicación desplegada en Streamlit Community Cloud si ya lo tienes)*
-
-Ejemplo:
-`Puedes ver la aplicación desplegada aquí: [Enlace a tu App Streamlit]`
-
-*(O instrucciones básicas si fuera necesario correrla localmente, aunque para la entrega el link es mejor)*
+`Puedes ver la aplicación desplegada aquí: [cycle-world](https://cycle-world.streamlit.app/)`
 
 ---
 
@@ -169,7 +164,3 @@ Ejemplo:
     * Utilizar librerías gráficas más avanzadas (Altair, Plotly) en Streamlit para mayor personalización visual.
     * Profundizar el análisis (ej: rutas más comunes, análisis por hora del día más detallado, etc.).
     * Optimizar consultas y Vistas si el volumen de datos creciera significativamente.
-
----
-
-¡Espero que este README sea completo y refleje todo el excelente trabajo que realizaste! ¡Mucha suerte con tu presentación y el video! 🤞
