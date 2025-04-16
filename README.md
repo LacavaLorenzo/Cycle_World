@@ -1,5 +1,6 @@
 # 🚲 Cycle World - Análisis de Datos y Dashboard Interactivo con Snowflake & Streamlit 🚀
 ![BicisLondres](images/01_Bicis_Londres.jpg)
+
 ## 📝 Resumen del Proyecto
 
 Este proyecto representa el ejercicio final de un proceso de selección y formación enfocado en **Snowflake**, la plataforma de datos en la nube. El objetivo principal fue simular un escenario real para la empresa ficticia "Cycle World" en Londres, que inicia su transformación digital y necesita analizar datos de uso de bicicletas que originalmente residían en archivos dispersos (.csv, .xlsx).
@@ -50,6 +51,7 @@ Cycle World necesitaba comenzar a explotar la información de sus operaciones de
 
 ## 🛠️ Proceso de Desarrollo Detallado
 ![RAWData](images/02_RAW.jpeg)
+
 Se siguió un enfoque estructurado en fases, utilizando Snowflake como motor principal, todos los archivos SQL se pueden ver en este mismo repositorio (aunque funcionen internamente en Snowflake):
 
 ### Fase 1: Configuración y Carga de Datos RAW 📥
@@ -64,6 +66,7 @@ Se siguió un enfoque estructurado en fases, utilizando Snowflake como motor pri
 
 ### Fase 2: Transformación y Modelado - Schema PROCESSED ✨
 ![ProcessedData](images/03_PROCESSED.jpeg)
+
 El objetivo fue limpiar los datos RAW y crear tablas estructuradas con tipos de datos correctos y relaciones implícitas (modelo dimensional básico: Dimensiones y Hechos).
 
 1.  **`PROCESSED.DIM_STATIONS` (Dimensión Estaciones):**
@@ -96,6 +99,7 @@ El objetivo fue limpiar los datos RAW y crear tablas estructuradas con tipos de 
 
 ### Fase 3: Análisis y Vistas - Schema ANALYTICS 📊
 ![Analytics](images/04_ANALYTICS.jpeg)
+
 Se crearon Vistas (Views) en el schema `ANALYTICS` para encapsular la lógica de cada requerimiento y pregunta, proporcionando una capa limpia para la herramienta de visualización (Streamlit).
 
 * `JOURNEYS_TO_STATIONS_VIEW`: Para el Reporte #1 (Resumen Simple).
@@ -110,6 +114,7 @@ Se crearon Vistas (Views) en el schema `ANALYTICS` para encapsular la lógica de
 
 ## 📈 Resultados y Hallazgos Clave
 ![ReporteSimple](images/05_Reporte_Simple.jpeg)
+
 Consultando las Vistas en `ANALYTICS`, se obtuvieron respuestas a los requerimientos:
 
 * Se generaron los reportes tabulares solicitados.
