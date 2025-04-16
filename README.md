@@ -151,9 +151,7 @@ Se desarrolló una aplicación web interactiva utilizando Streamlit para visuali
 
 Puedes ver la aplicación desplegada aquí:
 
-[cycle-world](https://cycle-world.streamlit.app/)
-
-Espero que te guste...
+<a href="https://cycle-world.streamlit.app/" target="_blank" rel="noopener noreferrer">cycle-world</a>
 
 ---
 
