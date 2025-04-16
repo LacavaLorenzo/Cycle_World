@@ -49,7 +49,7 @@ Cycle World necesitaba comenzar a explotar la información de sus operaciones de
 ---
 
 ## 🛠️ Proceso de Desarrollo Detallado
-
+![RAWData](images/02_RAW.jpeg)
 Se siguió un enfoque estructurado en fases, utilizando Snowflake como motor principal, todos los archivos SQL se pueden ver en este mismo repositorio (aunque funcionen internamente en Snowflake):
 
 ### Fase 1: Configuración y Carga de Datos RAW 📥
@@ -57,13 +57,13 @@ Se siguió un enfoque estructurado en fases, utilizando Snowflake como motor pri
 1.  **Entorno Snowflake:** Se creó una base de datos (`CYCLE_WORLD_DB`), esquemas separados (`RAW`, `PROCESSED`, `ANALYTICS`) para organización y un Warehouse virtual (`CYCLE_WORLD_WH`) para el cómputo.
 2.  **Staging:** Se crearon Stages internos nombrados en el schema `RAW` para cada archivo fuente (`JOURNEYS_CSV_STAGE`, `WEATHER_CSV_STAGE`, `BIKES_XLSX_STAGE`, `STATIONS_XLSX_STAGE`). Los archivos fueron subidos a estos stages.
 3.  **Inspección desde Stage:** Se utilizó `SELECT $N... FROM @stage` e `INFER_SCHEMA` para analizar la estructura, delimitadores (`,` para Weather, `;` para Journeys) y contenido directamente desde los stages antes de cargar. Se detectó el formato de año '11' en Journeys y la estructura con comas y comillas en Station Name (Excel).
-4.  **File Formats:** Se crearon `FILE_FORMAT` específicos (`FF_CSV_COMMA`, `FF_CSV_SEMICOLON`) definiendo delimitadores, manejo de encabezados (`SKIP_HEADER=1`), valores nulos (`EMPTY_FIELD_AS_NULL=TRUE`) y, crucialmente, el manejo de campos opcionalmente encerrados por comillas (`FIELD_OPTIONALLY_ENCLOSED_BY = '"'`) para interpretar correctamente los nombres de estación.
+4.  **File Formats:** Se crearon `FILE_FORMAT` específicos (`FF_CSV_JOURNEY`, `FF_CSV_WEATHER`) definiendo delimitadores, manejo de encabezados (`SKIP_HEADER=1`), valores nulos (`EMPTY_FIELD_AS_NULL=TRUE`) y, crucialmente, el manejo de campos opcionalmente encerrados por comillas (`FIELD_OPTIONALLY_ENCLOSED_BY = '"'`) para interpretar correctamente los nombres de estación.
 5.  **Manejo de Excel:** Dada la dificultad inicial con Snowpark y la limitación de tiempo, se optó por la solución pragmática de **convertir manualmente las hojas 'stations' y 'bikes' del `.xlsx` a archivos `.csv` separados** (`Stations_from_excel.csv`, `Bikes_from_excel.csv`). Estos CSVs se subieron a los stages.
 6.  **Creación de Tablas RAW:** Se crearon tablas en el schema `RAW` (`RAW_JOURNEYS`, `RAW_WEATHER`, `RAW_STATIONS`, `RAW_BIKES`) con **todas las columnas como `VARCHAR`** para una carga inicial robusta y flexible. Se añadieron columnas de metadatos (`_FILE_NAME`, `_FILE_ROW_NUMBER`, `_LOAD_TIMESTAMP`).
 7.  **Carga (`COPY INTO`):** Se utilizó `COPY INTO RAW_TABLE FROM @stage FILE_FORMAT = ... ON_ERROR = 'CONTINUE'` para cargar los datos desde los archivos CSV (incluyendo los convertidos del Excel) a sus respectivas tablas RAW.
 
 ### Fase 2: Transformación y Modelado - Schema PROCESSED ✨
-
+![ProcessedData](images/03_PROCESSED.jpeg)
 El objetivo fue limpiar los datos RAW y crear tablas estructuradas con tipos de datos correctos y relaciones implícitas (modelo dimensional básico: Dimensiones y Hechos).
 
 1.  **`PROCESSED.DIM_STATIONS` (Dimensión Estaciones):**
@@ -95,7 +95,7 @@ El objetivo fue limpiar los datos RAW y crear tablas estructuradas con tipos de 
     * Se añadió una **Clave Sustituta (`WEATHER_SK`)** usando una secuencia (`SEQ_WEATHER_SK.NEXTVAL`) para asegurar unicidad por fila y facilitar posibles uniones, estableciéndola como **Clave Primaria**.
 
 ### Fase 3: Análisis y Vistas - Schema ANALYTICS 📊
-
+![Analytics](images/04_ANALYTICS.jpeg)
 Se crearon Vistas (Views) en el schema `ANALYTICS` para encapsular la lógica de cada requerimiento y pregunta, proporcionando una capa limpia para la herramienta de visualización (Streamlit).
 
 * `JOURNEYS_TO_STATIONS_VIEW`: Para el Reporte #1 (Resumen Simple).
@@ -109,7 +109,7 @@ Se crearon Vistas (Views) en el schema `ANALYTICS` para encapsular la lógica de
 ---
 
 ## 📈 Resultados y Hallazgos Clave
-
+![ReporteSimple](images/05_Reporte_Simple.jpeg)
 Consultando las Vistas en `ANALYTICS`, se obtuvieron respuestas a los requerimientos:
 
 * Se generaron los reportes tabulares solicitados.
@@ -122,6 +122,8 @@ Consultando las Vistas en `ANALYTICS`, se obtuvieron respuestas a los requerimie
 ---
 
 ## 🖥️ Aplicación Streamlit
+![Reporte](images/11_Reporte.jpeg)
+![Dashboard](images/12_Dashboard.jpeg)
 
 Se desarrolló una aplicación web interactiva utilizando Streamlit para visualizar los resultados:
 
